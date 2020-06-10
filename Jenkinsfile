@@ -23,7 +23,7 @@ pipeline {
             steps {
                 echo "--------------Test begin-------------"
 		sh '''
-		result=`grep "Hello" index.html | wc -l`
+		result=`grep "Helloo" index.html | wc -l`
 		echo $result
 		if [ "$result" = "1" ]
 		then
