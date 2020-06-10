@@ -8,9 +8,9 @@ pipeline {
 		sh '''
 		cat <<EOF > index.html
 		<html>
-		<body bgcolor=black>
+		<body bgcolor=blue>
 		<center>
-		<h2><font color=white>Hello WORLD!</font></h2> 
+		<h2><font color=yellow>Hello WORLD!</font></h2> 
 		</center> 
 		</body>
 		</html>
@@ -37,10 +37,23 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                echo "--------------Deployment begin-------------"
-		sh "ls -la"
+            script {
+	     sshPublisher(
+  	     continueOnError: false, failOnError: true,
+	     publishers: [
+	      sshPublisherDesc(
+	       configName: "AWS_DEV_SER",
+	       verbose: true,
+    	       transfers: [
+		sshTransfer(
+	 	 sourceFiles: "index.html",
+	         removePrefix: "",
+	         remoteDirectory: "",
+	         execCommand: "sudo service apache2 restart"
+	        )
+               ])
+             ])
             }
-        }
-    }
+       }
+    
 }
