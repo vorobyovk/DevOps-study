@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-	     sshPublisher(publishers: [sshPublisherDesc(configName: 'AWS_DEV_SER', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'sudo service apache2 restart', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'index.html')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)]) 
+	     sshPublisher(publishers: [sshPublisherDesc(configName: 'Apache', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'echo "Test"', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '/var/www/html')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
        }
     }
